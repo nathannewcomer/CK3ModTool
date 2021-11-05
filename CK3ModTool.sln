@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK3ModTool", "CK3ModTool\CK3ModTool.csproj", "{CEEC92D6-195B-4EF4-B218-B9EBB955C4C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK3ModTool", "CK3ModTool\CK3ModTool.csproj", "{CEEC92D6-195B-4EF4-B218-B9EBB955C4C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK3ModToolTests", "CK3ModToolTests\CK3ModToolTests.csproj", "{C993C08B-6964-4005-8273-BB3724D9BA26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{CEEC92D6-195B-4EF4-B218-B9EBB955C4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEEC92D6-195B-4EF4-B218-B9EBB955C4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEEC92D6-195B-4EF4-B218-B9EBB955C4C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C993C08B-6964-4005-8273-BB3724D9BA26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C993C08B-6964-4005-8273-BB3724D9BA26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C993C08B-6964-4005-8273-BB3724D9BA26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C993C08B-6964-4005-8273-BB3724D9BA26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

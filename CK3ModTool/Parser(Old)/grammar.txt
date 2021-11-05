@@ -1,0 +1,19 @@
+﻿I know this isn't formal notation but it's good enough
+
+
+
+
+
+FILE = KEYVALUES and/or OBJECTS
+
+OBJECTS = OBJECT OBJECTS | OBJECT
+
+OBJECT = "string = {" CONTENTS "}"
+
+CONTENTS = LIST | OBJECTS CONTENTS | KEYVALUES CONTENTS
+
+LIST = list of strings
+
+KEYVALUES = KEYVALUE KEYVALUES | KEYVALUE
+
+KEYVALUE = string " = " string

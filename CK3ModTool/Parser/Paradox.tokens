@@ -1,0 +1,11 @@
+T__0=1
+T__1=2
+T__2=3
+IDENTIFIER=4
+NUMBER=5
+WHITESPACE=6
+COMMENT=7
+BOM=8
+'='=1
+'{'=2
+'}'=3

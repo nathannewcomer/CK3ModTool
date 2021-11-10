@@ -29,13 +29,34 @@ namespace CK3ModTool
         public MainWindow()
         {
             InitializeComponent();
+
+            // set game path if not already set
+            /*
+            if (string.IsNullOrEmpty(Properties.Settings.Default.GamePath))
+            {
+                MessageBoxResult result = MessageBox.Show("User-defined path not found. Would you like to set one now?", "Path not found", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.InitialDirectory = Properties.Settings.Default.GamePath;
+                    //openFileDialog.Filter = "Text Documents (*.txt)|*.txt|All files (*.*)|*.*";
+                    openFileDialog.CheckFileExists = false;
+
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        Properties.Settings.Default.GamePath = openFileDialog.FileName;
+                    }
+                }
+            }
+            */
         }
 
         private void MenuItemOpen_Click(object sender, RoutedEventArgs e)
         {
             // let the user select a file
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*"; ;
+            openFileDialog.InitialDirectory = Properties.Settings.Default.GamePath;
+            openFileDialog.Filter = "Text Documents (*.txt)|*.txt|All files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == false)
             {
@@ -43,15 +64,39 @@ namespace CK3ModTool
             }
 
             // parse file
-            ICharStream stream = CharStreams.fromPath(openFileDialog.FileName);
-            ParadoxLexer lexer = new ParadoxLexer(stream);
-            ITokenStream tokens = new CommonTokenStream(lexer);
-            ParadoxParser parser = new ParadoxParser(tokens);
-            parser.BuildParseTree = true;
-            ParadoxParser.FileContext tree = parser.file();
-            ParadoxFileListener listener = new ParadoxFileListener();
+            List<Pair> file = null;
+            try
+            {
+                ICharStream stream = CharStreams.fromPath(openFileDialog.FileName);
+                ParadoxLexer lexer = new ParadoxLexer(stream);
+                ITokenStream tokens = new CommonTokenStream(lexer);
+                ParadoxParser parser = new ParadoxParser(tokens);
+                parser.BuildParseTree = true;
+                ParadoxParser.FileContext tree = parser.file();
+                ParadoxFileVisitor visitor = new ParadoxFileVisitor();
+                file = visitor.VisitFile(tree);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not open the file:\n" + ex.Message, "Error", MessageBoxButton.OK);
+            }
 
-            ParseTreeWalker.Default.Walk(listener, tree);
+            try
+            {
+                AddFileToTreeView(file, FileTreeView);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not display file contents:\n" + ex.Message, "Error", MessageBoxButton.OK);
+            }
+        }
+
+        private void AddFileToTreeView(List<Pair> pairs, TreeView treeView)
+        {
+            foreach (Pair pair in pairs)
+            {
+                treeView.Items.Add(pair);
+            }
         }
     }
 }

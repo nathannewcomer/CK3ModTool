@@ -106,6 +106,12 @@ public partial class ParadoxParser : Parser {
 			IParadoxListener typedListener = listener as IParadoxListener;
 			if (typedListener != null) typedListener.ExitFile(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IParadoxVisitor<TResult> typedVisitor = visitor as IParadoxVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFile(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -163,6 +169,12 @@ public partial class ParadoxParser : Parser {
 			IParadoxListener typedListener = listener as IParadoxListener;
 			if (typedListener != null) typedListener.ExitPair(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IParadoxVisitor<TResult> typedVisitor = visitor as IParadoxVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPair(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -211,6 +223,12 @@ public partial class ParadoxParser : Parser {
 		public override void ExitRule(IParseTreeListener listener) {
 			IParadoxListener typedListener = listener as IParadoxListener;
 			if (typedListener != null) typedListener.ExitValue(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IParadoxVisitor<TResult> typedVisitor = visitor as IParadoxVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValue(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -276,6 +294,12 @@ public partial class ParadoxParser : Parser {
 			IParadoxListener typedListener = listener as IParadoxListener;
 			if (typedListener != null) typedListener.ExitObject(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IParadoxVisitor<TResult> typedVisitor = visitor as IParadoxVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -322,12 +346,6 @@ public partial class ParadoxParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public PairContext pair(int i) {
 			return GetRuleContext<PairContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ObjectContext[] @object() {
-			return GetRuleContexts<ObjectContext>();
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public ObjectContext @object(int i) {
-			return GetRuleContext<ObjectContext>(i);
-		}
 		[System.Diagnostics.DebuggerNonUserCode] public ListContext list() {
 			return GetRuleContext<ListContext>(0);
 		}
@@ -346,6 +364,12 @@ public partial class ParadoxParser : Parser {
 			IParadoxListener typedListener = listener as IParadoxListener;
 			if (typedListener != null) typedListener.ExitContents(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IParadoxVisitor<TResult> typedVisitor = visitor as IParadoxVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitContents(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -354,51 +378,32 @@ public partial class ParadoxParser : Parser {
 		EnterRule(_localctx, 8, RULE_contents);
 		int _la;
 		try {
-			int _alt;
-			State = 46;
+			State = 40;
 			ErrorHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(TokenStream,5,Context) ) {
+			switch ( Interpreter.AdaptivePredict(TokenStream,4,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				{
 				State = 36;
 				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,3,Context);
-				while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.INVALID_ALT_NUMBER ) {
-					if ( _alt==1 ) {
-						{
-						{
-						State = 33;
-						pair();
-						}
-						} 
+				_la = TokenStream.LA(1);
+				while (_la==IDENTIFIER) {
+					{
+					{
+					State = 33;
+					pair();
+					}
 					}
 					State = 38;
 					ErrorHandler.Sync(this);
-					_alt = Interpreter.AdaptivePredict(TokenStream,3,Context);
-				}
-				State = 42;
-				ErrorHandler.Sync(this);
-				_la = TokenStream.LA(1);
-				while (_la==T__1 || _la==IDENTIFIER) {
-					{
-					{
-					State = 39;
-					@object();
-					}
-					}
-					State = 44;
-					ErrorHandler.Sync(this);
 					_la = TokenStream.LA(1);
-				}
 				}
 				}
 				break;
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 45;
+				State = 39;
 				list();
 				}
 				break;
@@ -420,7 +425,10 @@ public partial class ParadoxParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER(int i) {
 			return GetToken(ParadoxParser.IDENTIFIER, i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NUMBER() { return GetToken(ParadoxParser.NUMBER, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] NUMBER() { return GetTokens(ParadoxParser.NUMBER); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NUMBER(int i) {
+			return GetToken(ParadoxParser.NUMBER, i);
+		}
 		public ListContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -436,6 +444,12 @@ public partial class ParadoxParser : Parser {
 			IParadoxListener typedListener = listener as IParadoxListener;
 			if (typedListener != null) typedListener.ExitList(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IParadoxVisitor<TResult> typedVisitor = visitor as IParadoxVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitList(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -444,23 +458,23 @@ public partial class ParadoxParser : Parser {
 		EnterRule(_localctx, 10, RULE_list);
 		int _la;
 		try {
-			State = 54;
+			State = 52;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
 			case IDENTIFIER:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 49;
+				State = 43;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 				do {
 					{
 					{
-					State = 48;
+					State = 42;
 					Match(IDENTIFIER);
 					}
 					}
-					State = 51;
+					State = 45;
 					ErrorHandler.Sync(this);
 					_la = TokenStream.LA(1);
 				} while ( _la==IDENTIFIER );
@@ -469,8 +483,20 @@ public partial class ParadoxParser : Parser {
 			case NUMBER:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 53;
-				Match(NUMBER);
+				State = 48;
+				ErrorHandler.Sync(this);
+				_la = TokenStream.LA(1);
+				do {
+					{
+					{
+					State = 47;
+					Match(NUMBER);
+					}
+					}
+					State = 50;
+					ErrorHandler.Sync(this);
+					_la = TokenStream.LA(1);
+				} while ( _la==NUMBER );
 				}
 				break;
 			default:
@@ -490,54 +516,53 @@ public partial class ParadoxParser : Parser {
 
 	private static char[] _serializedATN = {
 		'\x3', '\x608B', '\xA72A', '\x8133', '\xB9ED', '\x417C', '\x3BE7', '\x7786', 
-		'\x5964', '\x3', '\n', ';', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', '\t', 
-		'\x3', '\x4', '\x4', '\t', '\x4', '\x4', '\x5', '\t', '\x5', '\x4', '\x6', 
-		'\t', '\x6', '\x4', '\a', '\t', '\a', '\x3', '\x2', '\x6', '\x2', '\x10', 
-		'\n', '\x2', '\r', '\x2', '\xE', '\x2', '\x11', '\x3', '\x3', '\x3', '\x3', 
-		'\x3', '\x3', '\x3', '\x3', '\x3', '\x4', '\x3', '\x4', '\x3', '\x4', 
-		'\x5', '\x4', '\x1B', '\n', '\x4', '\x3', '\x5', '\x5', '\x5', '\x1E', 
-		'\n', '\x5', '\x3', '\x5', '\x3', '\x5', '\x3', '\x5', '\x3', '\x5', '\x3', 
-		'\x6', '\a', '\x6', '%', '\n', '\x6', '\f', '\x6', '\xE', '\x6', '(', 
-		'\v', '\x6', '\x3', '\x6', '\a', '\x6', '+', '\n', '\x6', '\f', '\x6', 
-		'\xE', '\x6', '.', '\v', '\x6', '\x3', '\x6', '\x5', '\x6', '\x31', '\n', 
-		'\x6', '\x3', '\a', '\x6', '\a', '\x34', '\n', '\a', '\r', '\a', '\xE', 
-		'\a', '\x35', '\x3', '\a', '\x5', '\a', '\x39', '\n', '\a', '\x3', '\a', 
-		'\x2', '\x2', '\b', '\x2', '\x4', '\x6', '\b', '\n', '\f', '\x2', '\x2', 
-		'\x2', '=', '\x2', '\xF', '\x3', '\x2', '\x2', '\x2', '\x4', '\x13', '\x3', 
-		'\x2', '\x2', '\x2', '\x6', '\x1A', '\x3', '\x2', '\x2', '\x2', '\b', 
-		'\x1D', '\x3', '\x2', '\x2', '\x2', '\n', '\x30', '\x3', '\x2', '\x2', 
-		'\x2', '\f', '\x38', '\x3', '\x2', '\x2', '\x2', '\xE', '\x10', '\x5', 
-		'\x4', '\x3', '\x2', '\xF', '\xE', '\x3', '\x2', '\x2', '\x2', '\x10', 
-		'\x11', '\x3', '\x2', '\x2', '\x2', '\x11', '\xF', '\x3', '\x2', '\x2', 
-		'\x2', '\x11', '\x12', '\x3', '\x2', '\x2', '\x2', '\x12', '\x3', '\x3', 
-		'\x2', '\x2', '\x2', '\x13', '\x14', '\a', '\x6', '\x2', '\x2', '\x14', 
-		'\x15', '\a', '\x3', '\x2', '\x2', '\x15', '\x16', '\x5', '\x6', '\x4', 
-		'\x2', '\x16', '\x5', '\x3', '\x2', '\x2', '\x2', '\x17', '\x1B', '\a', 
-		'\x6', '\x2', '\x2', '\x18', '\x1B', '\a', '\a', '\x2', '\x2', '\x19', 
-		'\x1B', '\x5', '\b', '\x5', '\x2', '\x1A', '\x17', '\x3', '\x2', '\x2', 
-		'\x2', '\x1A', '\x18', '\x3', '\x2', '\x2', '\x2', '\x1A', '\x19', '\x3', 
-		'\x2', '\x2', '\x2', '\x1B', '\a', '\x3', '\x2', '\x2', '\x2', '\x1C', 
-		'\x1E', '\a', '\x6', '\x2', '\x2', '\x1D', '\x1C', '\x3', '\x2', '\x2', 
-		'\x2', '\x1D', '\x1E', '\x3', '\x2', '\x2', '\x2', '\x1E', '\x1F', '\x3', 
-		'\x2', '\x2', '\x2', '\x1F', ' ', '\a', '\x4', '\x2', '\x2', ' ', '!', 
-		'\x5', '\n', '\x6', '\x2', '!', '\"', '\a', '\x5', '\x2', '\x2', '\"', 
-		'\t', '\x3', '\x2', '\x2', '\x2', '#', '%', '\x5', '\x4', '\x3', '\x2', 
-		'$', '#', '\x3', '\x2', '\x2', '\x2', '%', '(', '\x3', '\x2', '\x2', '\x2', 
-		'&', '$', '\x3', '\x2', '\x2', '\x2', '&', '\'', '\x3', '\x2', '\x2', 
-		'\x2', '\'', ',', '\x3', '\x2', '\x2', '\x2', '(', '&', '\x3', '\x2', 
-		'\x2', '\x2', ')', '+', '\x5', '\b', '\x5', '\x2', '*', ')', '\x3', '\x2', 
-		'\x2', '\x2', '+', '.', '\x3', '\x2', '\x2', '\x2', ',', '*', '\x3', '\x2', 
-		'\x2', '\x2', ',', '-', '\x3', '\x2', '\x2', '\x2', '-', '\x31', '\x3', 
-		'\x2', '\x2', '\x2', '.', ',', '\x3', '\x2', '\x2', '\x2', '/', '\x31', 
-		'\x5', '\f', '\a', '\x2', '\x30', '&', '\x3', '\x2', '\x2', '\x2', '\x30', 
-		'/', '\x3', '\x2', '\x2', '\x2', '\x31', '\v', '\x3', '\x2', '\x2', '\x2', 
-		'\x32', '\x34', '\a', '\x6', '\x2', '\x2', '\x33', '\x32', '\x3', '\x2', 
-		'\x2', '\x2', '\x34', '\x35', '\x3', '\x2', '\x2', '\x2', '\x35', '\x33', 
-		'\x3', '\x2', '\x2', '\x2', '\x35', '\x36', '\x3', '\x2', '\x2', '\x2', 
-		'\x36', '\x39', '\x3', '\x2', '\x2', '\x2', '\x37', '\x39', '\a', '\a', 
-		'\x2', '\x2', '\x38', '\x33', '\x3', '\x2', '\x2', '\x2', '\x38', '\x37', 
-		'\x3', '\x2', '\x2', '\x2', '\x39', '\r', '\x3', '\x2', '\x2', '\x2', 
-		'\n', '\x11', '\x1A', '\x1D', '&', ',', '\x30', '\x35', '\x38',
+		'\x5964', '\x3', '\n', '\x39', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
+		'\t', '\x3', '\x4', '\x4', '\t', '\x4', '\x4', '\x5', '\t', '\x5', '\x4', 
+		'\x6', '\t', '\x6', '\x4', '\a', '\t', '\a', '\x3', '\x2', '\x6', '\x2', 
+		'\x10', '\n', '\x2', '\r', '\x2', '\xE', '\x2', '\x11', '\x3', '\x3', 
+		'\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x4', '\x3', '\x4', 
+		'\x3', '\x4', '\x5', '\x4', '\x1B', '\n', '\x4', '\x3', '\x5', '\x5', 
+		'\x5', '\x1E', '\n', '\x5', '\x3', '\x5', '\x3', '\x5', '\x3', '\x5', 
+		'\x3', '\x5', '\x3', '\x6', '\a', '\x6', '%', '\n', '\x6', '\f', '\x6', 
+		'\xE', '\x6', '(', '\v', '\x6', '\x3', '\x6', '\x5', '\x6', '+', '\n', 
+		'\x6', '\x3', '\a', '\x6', '\a', '.', '\n', '\a', '\r', '\a', '\xE', '\a', 
+		'/', '\x3', '\a', '\x6', '\a', '\x33', '\n', '\a', '\r', '\a', '\xE', 
+		'\a', '\x34', '\x5', '\a', '\x37', '\n', '\a', '\x3', '\a', '\x2', '\x2', 
+		'\b', '\x2', '\x4', '\x6', '\b', '\n', '\f', '\x2', '\x2', '\x2', ';', 
+		'\x2', '\xF', '\x3', '\x2', '\x2', '\x2', '\x4', '\x13', '\x3', '\x2', 
+		'\x2', '\x2', '\x6', '\x1A', '\x3', '\x2', '\x2', '\x2', '\b', '\x1D', 
+		'\x3', '\x2', '\x2', '\x2', '\n', '*', '\x3', '\x2', '\x2', '\x2', '\f', 
+		'\x36', '\x3', '\x2', '\x2', '\x2', '\xE', '\x10', '\x5', '\x4', '\x3', 
+		'\x2', '\xF', '\xE', '\x3', '\x2', '\x2', '\x2', '\x10', '\x11', '\x3', 
+		'\x2', '\x2', '\x2', '\x11', '\xF', '\x3', '\x2', '\x2', '\x2', '\x11', 
+		'\x12', '\x3', '\x2', '\x2', '\x2', '\x12', '\x3', '\x3', '\x2', '\x2', 
+		'\x2', '\x13', '\x14', '\a', '\x6', '\x2', '\x2', '\x14', '\x15', '\a', 
+		'\x3', '\x2', '\x2', '\x15', '\x16', '\x5', '\x6', '\x4', '\x2', '\x16', 
+		'\x5', '\x3', '\x2', '\x2', '\x2', '\x17', '\x1B', '\a', '\x6', '\x2', 
+		'\x2', '\x18', '\x1B', '\a', '\a', '\x2', '\x2', '\x19', '\x1B', '\x5', 
+		'\b', '\x5', '\x2', '\x1A', '\x17', '\x3', '\x2', '\x2', '\x2', '\x1A', 
+		'\x18', '\x3', '\x2', '\x2', '\x2', '\x1A', '\x19', '\x3', '\x2', '\x2', 
+		'\x2', '\x1B', '\a', '\x3', '\x2', '\x2', '\x2', '\x1C', '\x1E', '\a', 
+		'\x6', '\x2', '\x2', '\x1D', '\x1C', '\x3', '\x2', '\x2', '\x2', '\x1D', 
+		'\x1E', '\x3', '\x2', '\x2', '\x2', '\x1E', '\x1F', '\x3', '\x2', '\x2', 
+		'\x2', '\x1F', ' ', '\a', '\x4', '\x2', '\x2', ' ', '!', '\x5', '\n', 
+		'\x6', '\x2', '!', '\"', '\a', '\x5', '\x2', '\x2', '\"', '\t', '\x3', 
+		'\x2', '\x2', '\x2', '#', '%', '\x5', '\x4', '\x3', '\x2', '$', '#', '\x3', 
+		'\x2', '\x2', '\x2', '%', '(', '\x3', '\x2', '\x2', '\x2', '&', '$', '\x3', 
+		'\x2', '\x2', '\x2', '&', '\'', '\x3', '\x2', '\x2', '\x2', '\'', '+', 
+		'\x3', '\x2', '\x2', '\x2', '(', '&', '\x3', '\x2', '\x2', '\x2', ')', 
+		'+', '\x5', '\f', '\a', '\x2', '*', '&', '\x3', '\x2', '\x2', '\x2', '*', 
+		')', '\x3', '\x2', '\x2', '\x2', '+', '\v', '\x3', '\x2', '\x2', '\x2', 
+		',', '.', '\a', '\x6', '\x2', '\x2', '-', ',', '\x3', '\x2', '\x2', '\x2', 
+		'.', '/', '\x3', '\x2', '\x2', '\x2', '/', '-', '\x3', '\x2', '\x2', '\x2', 
+		'/', '\x30', '\x3', '\x2', '\x2', '\x2', '\x30', '\x37', '\x3', '\x2', 
+		'\x2', '\x2', '\x31', '\x33', '\a', '\a', '\x2', '\x2', '\x32', '\x31', 
+		'\x3', '\x2', '\x2', '\x2', '\x33', '\x34', '\x3', '\x2', '\x2', '\x2', 
+		'\x34', '\x32', '\x3', '\x2', '\x2', '\x2', '\x34', '\x35', '\x3', '\x2', 
+		'\x2', '\x2', '\x35', '\x37', '\x3', '\x2', '\x2', '\x2', '\x36', '-', 
+		'\x3', '\x2', '\x2', '\x2', '\x36', '\x32', '\x3', '\x2', '\x2', '\x2', 
+		'\x37', '\r', '\x3', '\x2', '\x2', '\x2', '\n', '\x11', '\x1A', '\x1D', 
+		'&', '*', '/', '\x34', '\x36',
 	};
 
 	public static readonly ATN _ATN =

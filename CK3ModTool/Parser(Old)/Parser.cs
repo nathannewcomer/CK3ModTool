@@ -10,12 +10,12 @@ namespace CK3ModTool.Parser
     public class PFile
     {
         public Dictionary<string, string> KeyValues { get; private set; }
-        public List<PObject> Objects { get; private set; }
+        public List<PObject1> Objects { get; private set; }
 
         public PFile()
         {
             KeyValues = new Dictionary<string, string>();
-            Objects = new List<PObject>();
+            Objects = new List<PObject1>();
         }
 
         public void Parse(Tokenizer tokenizer)
@@ -66,7 +66,7 @@ namespace CK3ModTool.Parser
                 }
 
                 tokenizer.NextToken();
-                PObject obj = new PObject(name);
+                PObject1 obj = new PObject1(name);
                 obj.Parse(tokenizer);
                 Objects.Add(obj);
 
@@ -82,7 +82,7 @@ namespace CK3ModTool.Parser
         {
             string output = string.Join("\n", KeyValues.Select(x => string.Format("{0} = {1}", x.Key, x.Value)));
             
-            foreach (PObject o in Objects) {
+            foreach (PObject1 o in Objects) {
                 output += o.Print("");
             }
 
@@ -90,12 +90,12 @@ namespace CK3ModTool.Parser
         }
     }
 
-    public class PObject
+    public class PObject1
     {
         public string Name { get; private set; }
         public PContents Contents { get; internal set; }
 
-        public PObject(string name)
+        public PObject1(string name)
         {
             Name = name;
         }
@@ -119,13 +119,13 @@ namespace CK3ModTool.Parser
     public class PContents
     {
         public List<string> List { get; private set; }
-        public List<PObject> Objects { get; private set; }
+        public List<PObject1> Objects { get; private set; }
         public Dictionary<string, string> KeyValues { get; private set; }
 
         public PContents()
         {
             List = new List<string>();
-            Objects = new List<PObject>();
+            Objects = new List<PObject1>();
             KeyValues = new Dictionary<string, string>();
         }
 
@@ -170,7 +170,7 @@ namespace CK3ModTool.Parser
                     {
                         tokenizer.NextToken();
 
-                        PObject obj = new PObject(name);
+                        PObject1 obj = new PObject1(name);
                         obj.Parse(tokenizer);
                         Objects.Add(obj);
 

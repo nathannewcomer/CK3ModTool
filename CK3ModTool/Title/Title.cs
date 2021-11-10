@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CK3ModTool.Title
 {
-    class Title
+    public class Title
     {
         public string Name { get; set; }
         public Color Color1 { get; set; }

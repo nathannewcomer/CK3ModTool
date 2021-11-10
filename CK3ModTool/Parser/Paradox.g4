@@ -9,9 +9,9 @@ value : IDENTIFIER | NUMBER | object ;
 
 object : IDENTIFIER? '{' contents '}' ;
 
-contents : (pair* object*) | list ;
+contents : pair* | list ;
 
-list : IDENTIFIER+ | NUMBER ;
+list : IDENTIFIER+ | NUMBER+ ;
 
 // lexer
 IDENTIFIER : [-.'"@:_a-zA-Z0-9]+ ;

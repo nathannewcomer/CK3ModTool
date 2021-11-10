@@ -16,10 +16,9 @@
                 <Separator/>
                 <MenuItem Header="Exit"/>
             </MenuItem>
-            <Image DockPanel.Dock="Left"/>
         </Menu>
-        
-        
-        
+
+        <TreeView x:Name="FileTreeView" DockPanel.Dock="Bottom"/>
+
     </DockPanel>
 </Window>

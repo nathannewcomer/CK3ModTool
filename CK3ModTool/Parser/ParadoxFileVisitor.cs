@@ -56,7 +56,8 @@ namespace CK3ModTool.Parser
         public override Contents VisitContents([NotNull] ContentsContext context)
         {
             Contents contents = new Contents();
-            if (context.pair() is not null)
+            PairContext[] c = context.pair();
+            if (c is not null && c.Length > 0)
             {
                 contents.Pairs = context.pair().Select(p => VisitPair(p)).ToList();
             }
